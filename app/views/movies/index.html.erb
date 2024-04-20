@@ -1,0 +1,33 @@
+<div class="container mx-auto px-4 py-6">
+  <h1 class="text-3xl font-bold text-center mb-6">映画一覧</h1>
+
+  <% if @movies.any? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">  <!-- グリッドレイアウト -->
+      <% @movies.each do |movie| %>
+        <div id="movie_<%= movie.id %>" class="card w-full bg-base-100 shadow-xl p-6">  <!-- カードコンポーネント -->
+          <h3 class="text-xl font-semibold mb-2"><%= movie.title %></h3>
+          <% if movie.release_date.present? %>
+            <p class="text-gray-600">公開日: <%= movie.release_date %></p>
+          <% end %>
+          <% if movie.poster_path.present? %>
+            <%= image_tag("https://image.tmdb.org/t/p/w200#{movie.poster_path}", alt: "#{movie.title} ポスター", class: "rounded-xl mb-4") %>  <!-- 画像を丸くする -->
+          <% end %>
+          <div class="flex justify-between items-center">
+            <%= link_to '詳細', movie_path(movie.api_id), class: "btn btn-outline" %>  <!-- 詳細リンク -->
+            <% if current_user && current_user.email == ENV['ADMIN_EMAIL'] %>
+              <%= button_to '削除', movie_path(movie.id), method: :delete, data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-error' %>  <!-- 削除ボタン -->
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-center text-gray-600">映画は見つかりませんでした。</p>
+  <% end %>
+
+  <% if current_user && current_user.email == ENV['ADMIN_EMAIL'] %>
+    <div class="flex justify-center mt-6">
+      <%= button_to '映画データを取得', fetch_movies_path, method: :post, class: 'btn btn-primary' %> 
+    </div>  <!-- 映画データ取得ボタン -->
+  <% end %>
+</div>
