@@ -1,0 +1,12 @@
+<h1>保存された映画データ</h1>
+
+<% @movies.each do |movie| %>
+  <div class="card">
+    <div class="card-upperinfo">
+      <h3><%= movie.title %></h3>
+      <p class="release-date"><%= movie.release_date %></p>
+      <p><%= movie.overview %></p>
+      <p><%= image_tag "https://image.tmdb.org/t/p/w1280#{movie.poster_path}", class: "card-img" %></p>
+    </div>
+  </div>
+<% end %>

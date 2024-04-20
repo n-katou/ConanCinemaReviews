@@ -70,3 +70,5 @@ group :test do
 end
 
 gem "devise"
+gem 'themoviedb-api', '~> 1.4', '>= 1.4.1'
+gem 'dotenv-rails'

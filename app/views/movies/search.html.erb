@@ -1,0 +1,97 @@
+<h1>映画検索</h1>
+
+<div>
+  <%= form_tag(root_path, method: :get) do %>
+    <%= search_field_tag :looking_for, nil, placeholder: 'Movie Title...' %>
+    <%= submit_tag '検索' %>
+  <% end %>
+</div>
+
+<%# 検索された時にコンテンツを表示する %>
+<%if params[:looking_for].present? %>
+    <% movieinfo = JSON.parse((Tmdb::Search.movie(params[:looking_for])).to_json) %>
+    <h2><%= params[:looking_for] %>の検索結果</h2>
+    =====================
+    <% i = 0 %>
+    <div class="card-wrapper">
+        <% while i < movieinfo['table']['results'].count %>
+            <div class="card">
+                <div class="card-upperinfo">
+                    <%if movieinfo['table']['results'][i]['table']['title'].present?%>
+                        <h3><%= link_to movieinfo['table']['results'][i]['table']['title'],detail_path(movieinfo['table']['results'][i]['table']['id']) %></h3>
+                    <%end%>
+
+                    <% if movieinfo['table']['results'][i]['table']['release_date'].present? %>
+                        <p class="release-date"><%= movieinfo['table']['results'][i]['table']['release_date'] %></p>
+                    <%end%>
+                </div>
+
+
+                <% if movieinfo['table']['results'][i]['table']['poster_path'].present? %>
+                    <p><%= image_tag 'https://image.tmdb.org/t/p/w1280' + movieinfo['table']['results'][i]['table']['poster_path'],class: "card-img" %></p>
+                <%end%>
+            </div>
+            <% i += 1%>
+        <%end%>
+    </div>
+<%else%>
+    <%# 検索されていない時にトレンドコンテンツを表示する %>
+    <h2>本日の世界のトレンド</h2>
+    ====================
+    <% movieinfo = JSON.parse((Tmdb::Movie.popular).to_json) %>
+    <% i = 0 %>
+    <div class="card-wrapper">
+        <% while i < movieinfo['table']['results'].count %>
+            <div class="card">
+                <div class="card-upperinfo">
+                    <%if movieinfo['table']['results'][i]['table']['title'].present?%>
+                        <h3><%= link_to movieinfo['table']['results'][i]['table']['title'], detail_path(movieinfo['table']['results'][i]['table']['id'])%></h3>
+                    <%end%>
+
+                    <% if movieinfo['table']['results'][i]['table']['release_date'].present? %>
+                        <p class="release-date"><%= movieinfo['table']['results'][i]['table']['release_date'] %></p>
+                    <%end%>
+                </div>
+
+                <% if movieinfo['table']['results'][i]['table']['poster_path'].present? %>
+                    <p><%= image_tag 'https://image.tmdb.org/t/p/w1280' + movieinfo['table']['results'][i]['table']['poster_path'],class: "card-img" %></p>
+                <%end%>
+            </div>
+
+            <% i += 1%>
+        <%end%>
+    </div>
+<%end%>
+
+<style>
+    .card {
+        // box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        width: 28%;
+        margin-bottom: 100px;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .card-wrapper {
+        width: 80%;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    .release-date {
+        text-align: right;
+    }
+
+    .card-img {
+        width: 100%;
+        border-radius: 16px;
+    }
+
+    .card-upperinfo {
+        height: 139px;
+        overflow-y: scroll;
+    }
+</style>

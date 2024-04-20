@@ -1,0 +1,31 @@
+<h1>映画検索</h1>
+
+<%= form_tag(movies_path, method: :get) do %>
+  <%= search_field_tag :looking_for, params[:looking_for], placeholder: 'Movie Title...' %>
+  <%= submit_tag '検索' %>
+<% end %>
+
+<% if @movies.any? %>
+  <h2><%= params[:looking_for].present? ? "#{params[:looking_for]}の検索結果" : "本日の世界のトレンド" %></h2>
+  <div class="card-wrapper">
+    <% @movies.each do |movie| %>
+      <div class="card">
+        <div class="card-upperinfo">
+          <% if movie.title.present? %>
+            <h3><%= link_to movie.title, movie_path(movie.id) %></h3>
+          <% end %>
+          <% if movie.release_date.present? %>
+            <p class="release-date"><%= movie.release_date %></p>
+          <% end %>
+          <% if movie.poster_path.present? %>
+            <p><%= image_tag "https://image.tmdb.org/t/p/w1280#{movie.poster_path}", class: "card-img" %></p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>検索結果が見つかりません。</p>
+<% end %>
+
+<%= button_to '映画データを取得', fetch_movies_path, method: :post, class: 'btn btn-primary' %>

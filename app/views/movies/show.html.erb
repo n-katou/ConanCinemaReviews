@@ -1,0 +1,15 @@
+<h1><%= @movie.title %></h1>
+
+<div class="movie-details">
+  <% if @movie.release_date.present? %>
+    <p>リリース日: <%= @movie.release_date %></p>
+  <% end %>
+
+  <% if @movie.poster_path.present? %>
+    <%= image_tag "https://image.tmdb.org/t/p/w1280#{@movie.poster_path}", class: "movie-poster" %>
+  <% end %>
+
+  <% if @movie.overview.present? %>
+    <p>概要: <%= @movie.overview %></p>
+  <% end %>
+</div>
