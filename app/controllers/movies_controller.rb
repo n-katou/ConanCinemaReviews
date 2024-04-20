@@ -14,7 +14,25 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.all
+    @movies = Movie.order(release_date: :asc) 
+  end
+
+  def destroy
+    @movie = Movie.find(params[:id])
+    if @movie.destroy
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.remove("movie_#{@movie.id}")  # Turboで対象要素を削除
+        end
+        format.html do
+          flash[:notice] = '映画を削除しました。'
+          redirect_to movies_path
+        end
+      end
+    else
+      flash[:alert] = '映画の削除に失敗しました。'
+      redirect_back fallback_location: root_path
+    end
   end
 
   def fetch_movies
