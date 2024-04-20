@@ -14,45 +14,52 @@ class MoviesController < ApplicationController
   end
 
   def index
-    if params[:looking_for].present?
-      # 検索用の処理
-      response = Tmdb::Search.movie(params[:looking_for])
-    else
-      # トレンド映画の取得
-      response = Tmdb::Movie.popular
-    end
-
-    if response
-      @movies = response['results']
-    else
-      @movies = []
-    end
+    @movies = Movie.all
   end
 
   def fetch_movies
-    # APIキーと日本語クエリをエンコード
+    # APIキーと日本語クエリ
     api_key = ENV['TMDB_API_KEY']
-    query = URI.encode_www_form_component('名探偵コナン') # 日本語クエリをエンコード
-
-    # エンコードされたURLに言語設定を追加
-    url = "https://api.themoviedb.org/3/search/movie?api_key=#{api_key}&query=#{query}&language=ja"
-    uri = URI(url)
-
-    # APIからデータを取得
-    response = Net::HTTP.get(uri)
-    movies_data = JSON.parse(response)["results"]
-
-    # データをDBに保存
-    movies_data.each do |movie|
+    query = URI.encode_www_form_component('名探偵コナン')
+    language = 'ja'
+  
+    # ページ数を設定して全ページから取得
+    total_pages = 1  # 初期値
+    page = 1
+    movies_list = []  # 全部の映画データを格納
+  
+    while page <= total_pages
+      # ページごとのURL
+      url = "https://api.themoviedb.org/3/search/movie?api_key=#{api_key}&query=#{query}&language=#{language}&page=#{page}"
+      uri = URI.parse(url)
+  
+      # APIからデータを取得
+      response = Net::HTTP.get_response(uri)
+      raise 'Failed to get movie data' unless response.is_a?(Net::HTTPSuccess)
+  
+      # レスポンスからデータを抽出
+      data = JSON.parse(response.body)
+      movies_list.concat(data["results"])  # 取得した映画データをリストに追加
+  
+      # 全ページ数を更新
+      total_pages = data["total_pages"]
+  
+      # 次のページに進む
+      page += 1
+    end
+  
+    # データベースに保存
+    movies_list.each do |movie|
+      next if Movie.exists?(api_id: movie["id"])  # 重複チェック
+  
+      # 映画情報を保存
       Movie.create!(
+        api_id: movie["id"],
         title: movie["title"],
         release_date: movie["release_date"],
         overview: movie["overview"],
         poster_path: movie["poster_path"]
       )
     end
-
-    # 取得した映画データを表示
-    @movies = Movie.all
   end
 end

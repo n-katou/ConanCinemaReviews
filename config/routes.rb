@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   root 'movies#index'
   resources :movies, only: [:index, :show]
   post 'movies/fetch_movies', to: 'movies#fetch_movies', as: 'fetch_movies'
+  get 'movies/searcb', to: 'movies#search'
 end
