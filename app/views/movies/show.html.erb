@@ -1,9 +1,13 @@
-<div class="container mx-auto px-6 py-8 text-left">  <!-- テキストの左寄せ -->
-  <h1 class="text-4xl font-bold mb-6"><%= @movie.title %></h1>  <!-- タイトルも左寄せ -->
+<div class="container mx-auto px-6 py-8">  <!-- コンテナスタイル -->
+  <h1 class="text-4xl font-bold text-center mb-6"><%= @movie.title %></h1>  <!-- タイトル中央配置 -->
 
-  <div class="flex flex-col items-start space-y-6">  <!-- 要素を左寄せ -->
+  <div class="flex flex-col space-y-6">  <!-- 垂直方向に要素を並べて中央配置 -->
     <% if @movie.poster_path.present? %>
-      <%= image_tag("https://image.tmdb.org/t/p/w1280#{@movie.poster_path}", class: "rounded-lg shadow-lg w-full md:w-1/2", alt: "#{@movie.title} ポスター") %>  <!-- ポスタースタイル -->
+      <div class="w-full flex justify-center">  <!-- ポスター中央配置 -->
+        <div class="rounded-lg shadow-lg w-full md:w-1/2">  <!-- ポスターコンテナ -->
+          <%= image_tag("https://image.tmdb.org/t/p/w1280#{@movie.poster_path}", class: "w-full", alt: "#{@movie.title} ポスター") %>  <!-- ポスタースタイル -->
+        </div>
+      </div>
     <% end %>
 
     <div class="card bg-base-200 p-6 rounded-lg">  <!-- カードスタイル -->
@@ -17,27 +21,20 @@
     </div>
 
     <% if user_signed_in? %>  <!-- ユーザーがサインインしている場合 -->
-      <%= render 'reviews/form' %>  <!-- レビュー投稿フォームの部分テンプレート -->
+      <%= render 'reviews/form' %>  <!-- レビュー投稿フォーム -->
     <% else %>
-      <div class="alert alert-warning">  <!-- 警告スタイル、左寄せ -->
+      <div class="alert alert-warning">  <!-- 警告スタイル -->
         <p>レビュー投稿は、登録したユーザーのみ可能です。<%= link_to 'ログイン', new_user_session_path %></p>
       </div>
     <% end %>
 
-    <div class="w-full md:w-1/2 mt-6">  <!-- レビューリスト、左寄せ -->
-      <h2 class="text-2xl font-bold">レビュー一覧</h2>
-      <% @movie.reviews.each do |review| %>
-        <div class="bg-base-100 p-4 rounded-lg mb-4 text-left">  <!-- 各レビューを左寄せ -->
-          <p class="text-gray-800"><%= review.content %></p>  <!-- レビュー内容 -->
-        </div>
-      <% end %>
-    </div>
-
+    <%= render 'reviews/list', movie: @movie %>
+    
     <div class="mt-6 text-center">  <!-- 投票ボタン -->
       <% if user_signed_in? %>
-        <%= link_to "投票", vote_movie_path(@movie.id), class: "btn btn-primary", data: { turbo_method: :post, turbo_confirm: '投票しますか？' } %>  <!-- 左寄せ -->
+        <%= link_to "投票", vote_movie_path(@movie.id), class: "btn btn-primary", data: { turbo_method: :post, turbo_confirm: '投票しますか？' } %>
       <% else %>
-        <div class="alert alert-warning">  <!-- 警告スタイル -->
+        <div class="alert alert-warning">
           <p>投票は、登録したユーザーのみ可能です。<%= link_to 'ログイン', new_user_session_path %></p>
         </div>
       <% end %>
