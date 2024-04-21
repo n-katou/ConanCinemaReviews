@@ -1,25 +1,27 @@
-<%- if controller_name != 'sessions' %>
-  <%= link_to "Log in", new_session_path(resource_name) %><br />
-<% end %>
-
-<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Sign up", new_registration_path(resource_name) %><br />
-<% end %>
-
-<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
-<% end %>
-
-<%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-  <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
-<% end %>
-
-<%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
-  <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
-<% end %>
-
-<%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false } %><br />
+<div class="flex flex-col space-y-2 text-center">  <!-- リンクを縦に並べる -->
+  <% if controller_name != 'sessions' %>  <!-- ログインリンク -->
+    <%= link_to "ログイン", new_session_path(resource_name), class: "text-blue-500 hover:underline" %>
   <% end %>
-<% end %>
+
+  <% if devise_mapping.registerable? && controller_name != 'registrations' %>  <!-- サインアップリンク -->
+    <%= link_to "サインアップ", new_registration_path(resource_name), class: "text-blue-500 hover:underline" %>
+  <% end %>
+
+  <% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>  <!-- パスワードリセットリンク -->
+    <%= link_to "パスワードをお忘れですか？", new_password_path(resource_name), class: "text-blue-500 hover:underline" %>
+  <% end %>
+
+  <% if devise_mapping.confirmable? && controller_name != 'confirmations' %>  <!-- 確認メール再送リンク -->
+    <%= link_to "確認メールを受け取っていませんか？", new_confirmation_path(resource_name), class: "text-blue-500 hover:underline" %>
+  <% end %>
+
+  <% if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>  <!-- アンロックリンク -->
+    <%= link_to "アンロックの指示を受け取っていませんか？", new_unlock_path(resource_name), class: "text-blue-500 hover:underline" %>
+  <% end %>
+
+  <% if devise_mapping.omniauthable? %>  <!-- OAuthリンク -->
+    <% resource_class.omniauth_providers.each do |provider| %>
+      <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class: "btn btn-outline btn-primary" %>  <!-- ボタンスタイル -->
+    <% end %>
+  <% end %>
+</div>
