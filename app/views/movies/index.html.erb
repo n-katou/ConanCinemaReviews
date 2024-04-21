@@ -18,6 +18,7 @@
               <%= button_to '削除', movie_path(movie.id), method: :delete, data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-error' %>  <!-- 削除ボタン -->
             <% end %>
           </div>
+          <p>この映画への投票数: <%= Vote.where(movie_id: movie.id).count %></p>
         </div>
       <% end %>
     </div>

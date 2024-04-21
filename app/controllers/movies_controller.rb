@@ -10,7 +10,18 @@ class MoviesController < ApplicationController
 
 
   def show
-    @movie = Tmdb::Movie.detail(params[:id])
+    Rails.logger.info("Looking for movie with ID: #{params[:id]}")  # デバッグ用ログ
+    @movie = Movie.find_by(api_id: params[:id])
+  
+    if @movie.nil?
+      # エラーの詳細をログに記録
+      Rails.logger.error("Movie with ID #{params[:id]} not found.")
+      flash[:error] = "映画が見つかりません。"
+      redirect_to movies_path
+    else
+      @review = @movie.reviews.build  # レビュー用インスタンスを作成
+      Rails.logger.info("Review instance created for movie: #{@movie.title}")  # デバッグ用ログ
+    end
   end
 
   def index
