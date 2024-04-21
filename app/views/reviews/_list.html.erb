@@ -1,9 +1,19 @@
-<div class="w-full md:w-1/2 mt-6 text-left">  <!-- レビューリスト、左寄せ -->
-  <h2 class="text-2xl font-bold">レビュー一覧</h2>  <!-- タイトルも左寄せ -->
-  
-  <% @movie.reviews.each do |review| %>
-    <div class="bg-base-100 p-4 rounded-lg mb-4">  <!-- 各レビューを左寄せでカード表示 -->
-      <p class="text-gray-800"><%= review.content %></p>  <!-- レビュー内容 -->
-    </div>
-  <% end %>
+<div class="container mx-auto px-6 py-8">  <!-- コンテナスタイル -->
+  <h2 class="text-2xl font-bold mb-4 text-left">レビュー一覧</h2>  <!-- タイトルも左寄せ -->
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">  <!-- グリッド設定、2列 -->
+    <% @movie.reviews.each do |review| %>
+      <% if review.user && review.user.name %>  <!-- ユーザー名が存在する場合のみ表示 -->
+        <div class="card bg-base-100 shadow-lg p-4 rounded-lg w-full">  <!-- カードスタイリング -->
+          <div class="card-title font-bold text-gray-700">  <!-- ユーザー名 -->
+            <%= review.user.name %>
+          </div>
+          
+          <div class="card-body">  <!-- レビュー内容 -->
+            <p class="text-gray-800"><%= review.content %></p>
+          </div>
+        </div>
+      <% end %>  <!-- ユーザー名がない場合はスキップ -->
+    <% end %>
+  </div>
 </div>

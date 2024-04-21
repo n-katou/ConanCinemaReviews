@@ -32,7 +32,7 @@
     
     <div class="mt-6 text-center">  <!-- 投票ボタン -->
       <% if user_signed_in? %>
-        <%= link_to "投票", vote_movie_path(@movie.id), class: "btn btn-primary", data: { turbo_method: :post, turbo_confirm: '投票しますか？' } %>
+        <%= link_to "投票", vote_movie_path(@movie.id), class: "btn btn-primary text-xl py-3 px-6 bg-blue-500 text-white font-bold shadow-lg rounded-lg hover:bg-blue-700", data: { turbo_method: :post, turbo_confirm: '投票しますか？' } %>
       <% else %>
         <div class="alert alert-warning">
           <p>投票は、登録したユーザーのみ可能です。<%= link_to 'ログイン', new_user_session_path %></p>

@@ -3,6 +3,7 @@
 <table class="table w-full table-zebra">  <%# テーブルのスタイリング %>
   <thead>
     <tr>
+      <th>ID</th>
       <th>ユーザー名</th>
       <th>メール</th>
       <th>投票数</th>
@@ -12,6 +13,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= user.id %></td>
         <td><%= user.name || '名前なし' %></td>  <%# ユーザー名 %>
         <td><%= user.email %></td>  <%# ユーザーメール %>
         <td><%= user.vote_count %></td>  <%# ユーザーの投票数 %>

@@ -10,6 +10,7 @@
       <% if current_user && current_user.email == ENV['ADMIN_EMAIL'] %>
         <li><%= link_to '管理画面', admin_path %></li>
       <% end %>
+      <li><%= link_to 'ユーザー編集', edit_user_registration_path %></li>
       <li><%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete } %></li>
     </ul>
   </div>
