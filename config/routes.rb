@@ -11,4 +11,7 @@ Rails.application.routes.draw do
   end
   post 'movies/fetch_movies', to: 'movies#fetch_movies', as: 'fetch_movies'
 
+  get 'admin', to: 'admin#index'  # 管理者用トップページ
+  post 'admin/reset_vote_count', to: 'admin#reset_vote_count'  # 投票数リセット
+
 end
