@@ -9,7 +9,7 @@
   <div class="flex justify-between items-center">
     <%= link_to '詳細', movie_path(movie.api_id), class: "btn btn-outline" %>  <!-- 詳細リンク -->
     <% if current_user && current_user.email == ENV['ADMIN_EMAIL'] %>
-      <%= button_to '削除', movie_path(movie.id), method: :delete, data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-error' %>  <!-- 削除ボタン -->
+      <%= link_to '削除', movie_path(movie.id), method: :delete, data: { turbo_method: :delete,turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-error' %>
     <% end %>
   </div>
   <p>この映画への投票数: <%= Vote.where(movie_id: movie.id).count %></p>

@@ -17,7 +17,7 @@
     </div>
     
     <div class="mt-6">  <!-- 投票ボタン -->
-      <%= button_to "投票", vote_movie_path(@movie.id), method: :post %>
+      <%= link_to "投票", vote_movie_path(@movie.id), data: { turbo_method: :post, turbo_confirm: '投票しますか？' } %>
     </div>
 
     <%= render 'reviews/form' %>
