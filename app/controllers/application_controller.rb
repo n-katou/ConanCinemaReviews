@@ -5,6 +5,14 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     # /users/sign_up
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :phone_number, :full_name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+  end
+
+  def authenticate_admin!
+    unless current_user && current_user.email == ENV['ADMIN_EMAIL']
+      flash[:alert] = "アクセスが許可されていません。"
+      redirect_to root_path
+    end
   end
 end

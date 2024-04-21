@@ -1,0 +1,24 @@
+<h1 class="text-2xl font-bold">ユーザー管理</h1>
+
+<table class="table w-full table-zebra">  <%# テーブルのスタイリング %>
+  <thead>
+    <tr>
+      <th>ユーザー名</th>
+      <th>メール</th>
+      <th>投票数</th>
+      <th>アクション</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name || '名前なし' %></td>  <%# ユーザー名 %>
+        <td><%= user.email %></td>  <%# ユーザーメール %>
+        <td><%= user.vote_count %></td>  <%# ユーザーの投票数 %>
+        <td>
+          <%= link_to 'リセット', admin_reset_vote_count_path(user_id: user.id), data: { turbo_confirm: '本当にリセットしますか？', turbo_method: :post }, class: 'btn btn-error' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
