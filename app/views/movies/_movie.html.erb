@@ -1,0 +1,16 @@
+<div id="movie_<%= movie.id %>" class="card w-full bg-base-100 shadow-xl p-6">  <!-- カードコンポーネント -->
+  <h3 class="text-xl font-semibold mb-2"><%= movie.title %></h3>
+  <% if movie.release_date.present? %>
+    <p class="text-gray-600">公開日: <%= movie.release_date %></p>
+  <% end %>
+  <% if movie.poster_path.present? %>
+    <%= image_tag("https://image.tmdb.org/t/p/w200#{movie.poster_path}", alt: "#{movie.title} ポスター", class: "rounded-xl mb-4") %>  <!-- 画像を丸くする -->
+  <% end %>
+  <div class="flex justify-between items-center">
+    <%= link_to '詳細', movie_path(movie.api_id), class: "btn btn-outline" %>  <!-- 詳細リンク -->
+    <% if current_user && current_user.email == ENV['ADMIN_EMAIL'] %>
+      <%= button_to '削除', movie_path(movie.id), method: :delete, data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-error' %>  <!-- 削除ボタン -->
+    <% end %>
+  </div>
+  <p>この映画への投票数: <%= Vote.where(movie_id: movie.id).count %></p>
+</div>

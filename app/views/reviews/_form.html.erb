@@ -1,0 +1,15 @@
+<div class="review-form">
+  <h2 class="text-2xl font-bold">レビューを投稿する</h2>
+  <% if @review.present? %>
+    <%= form_with model: [@movie, Review.new], local: true do |f| %>
+      <%= f.hidden_field :movie_id, value: @movie.api_id %>  <!-- api_idを送信する -->
+      <div class="form-group">
+        <%= f.label :content, "レビュー内容" %>
+        <%= f.text_area :content, class: "form-control", rows: 4 %>
+      </div>
+      <%= f.submit "投稿", class: "btn btn-primary" %>
+    <% end %>
+  <% else %>
+    <p>レビューを投稿できません。</p>
+  <% end %>
+</div>
