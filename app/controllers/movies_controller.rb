@@ -90,5 +90,11 @@ class MoviesController < ApplicationController
         poster_path: movie["poster_path"]
       )
     end
+    flash[:notice] = '映画データの取得が完了しました。'
+    redirect_to movies_path  # リダイレクト先を設定
+
+    rescue StandardError => e
+      flash[:alert] = "映画データの取得に失敗しました: #{e.message}"
+      redirect_to movies_path  # エラーが発生した場合もリダイレクト
   end
 end
