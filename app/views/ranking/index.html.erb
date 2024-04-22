@@ -1,0 +1,27 @@
+<div class="container mx-auto px-6 py-8">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold text-center mb-6">映画ランキング</h1>
+    <%= link_to '映画一覧へ', movies_path, class: 'btn btn-outline btn-accent' %>  <!-- 映画一覧へのリンク -->
+  </div>
+
+  <% if @movies.any? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">  <!-- グリッドレイアウト -->
+      <% @movies.each_with_index do |movie, index| %>
+        <%# 1位から3位の背景色を変更する %>
+        <div class="card shadow-xl p-6 <%= index == 0 ? 'bg-yellow-300' : index == 1 ? 'bg-gray-300' : index == 2 ? 'bg-orange-300' : 'bg-base-100' %>">
+          <div class="flex justify-between items-center">
+            <h3 class="text-xl font-semibold mb-2">
+              <%= index + 1 %>位: <%= movie.title %>  <!-- 順位とタイトルを表示 -->
+            </h3>
+            <%= image_tag("https://image.tmdb.org/t/p/w200#{movie.poster_path}", alt: "#{movie.title} ポスター", class: "rounded-xl mb-4") %>  <!-- ポスター画像 -->
+          </div>
+          <p>公開日: <%= movie.release_date %></p>  <!-- 映画の詳細情報 -->
+          <p>投票数: <%= movie.votes.count %></p>  <!-- 投票数を表示 -->
+          <%= link_to '詳細', movie_path(movie.api_id), class: "btn btn-outline" %>  <!-- 詳細へのリンク -->
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-center text-gray-600">映画は見つかりませんでした。</p>  <!-- 映画がない場合のメッセージ -->
+  <% end %>
+</div>
