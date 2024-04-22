@@ -13,6 +13,8 @@ ja:
         too_short: "は%{count}文字以上でなければなりません"
         invalid: "が正しくありません"
         taken: "はすでに存在します"
+        not_saved: "%{resource} の保存に失敗しました: %{count} 件のエラーが含まれています"
+        can't_be_blank: "入力してください"
   movies:
     not_found: "映画が見つかりません。"
   votes:

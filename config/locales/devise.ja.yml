@@ -17,4 +17,6 @@ ja:
         not_found_in_database: "ユーザーが見つかりません"  # データベースにユーザーがない場合
     errors:
       messages:
-        not_saved: "保存できませんでした"  # 保存に失敗したときのメッセージ
+        not_saved: "%{resource} の保存に失敗しました: %{count} 件のエラーが含まれています"
+        can't_be_blank: "入力してください"
+        too_short: "%{count} 文字以上必要です"
