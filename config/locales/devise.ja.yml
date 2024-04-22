@@ -1,0 +1,20 @@
+ja:
+  devise:
+    sessions:
+      signed_in: "ログインしました"  # サインイン時のメッセージ
+      signed_out: "ログアウトしました"  # サインアウト時のメッセージ
+    registrations:
+      signed_up: "登録が完了しました"  # サインアップ時のメッセージ
+      updated: "プロフィールが更新されました"  # プロフィール更新時のメッセージ
+    passwords:
+      send_instructions: "パスワードリセットの手順を送信しました"
+    failure:
+      invalid: "メールアドレスまたはパスワードが間違っています"  # 無効なログイン時のメッセージ
+      locked: "アカウントがロックされています"  # ロックされたアカウントのメッセージ
+      timeout: "セッションがタイムアウトしました"  # セッションのタイムアウト
+      unauthenticated: "認証が必要です"  # 認証が必要なときのメッセージ
+      user:
+        not_found_in_database: "ユーザーが見つかりません"  # データベースにユーザーがない場合
+    errors:
+      messages:
+        not_saved: "保存できませんでした"  # 保存に失敗したときのメッセージ

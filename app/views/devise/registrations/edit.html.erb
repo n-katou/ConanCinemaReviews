@@ -15,6 +15,15 @@
           <%= f.label :password, "新しいパスワード (変更しない場合は空白で)" %>  <!-- パスワードラベル -->
           <%= f.password_field :password, class: "form-control w-full p-2 border rounded", autocomplete: "new-password" %>  <!-- パスワード入力 -->
         </div>
+        <div class="mb-4">  <!-- パスワード確認 -->
+          <%= f.label :password_confirmation, "パスワード確認" %>  <!-- パスワード確認ラベル -->
+          <%= f.password_field :password_confirmation, class: "form-control w-full p-2 border rounded", autocomplete: "new-password" %>  <!-- パスワード確認入力 -->
+        </div>
+
+        <div class="mb-4">  <!-- 現在のパスワード -->
+          <%= f.label :current_password, "現在のパスワード (変更を確認するために必要)" %>  <!-- 現在のパスワードラベル -->
+          <%= f.password_field :current_password, class: "form-control w-full p-2 border rounded", autocomplete: "current-password" %>  <!-- 現在のパスワード入力 -->
+        </div>
 
         <div class="actions text-right">  <!-- フォームアクション -->
           <%= f.submit "更新", class: "btn btn-primary" %>  <!-- 更新ボタン -->

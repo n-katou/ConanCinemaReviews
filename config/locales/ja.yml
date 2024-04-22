@@ -1,0 +1,21 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+    errors:
+      messages:
+        blank: "を入力してください"
+        too_short: "は%{count}文字以上でなければなりません"
+        invalid: "が正しくありません"
+        taken: "はすでに存在します"
+  movies:
+    not_found: "映画が見つかりません。"
+  votes:
+    limit_reached: "投票は3回までしかできません。"
+    already_voted: "この映画には既に投票しています。"
+    success: "%{movie_title} に投票しました（%{current_count}回目/3回）"
