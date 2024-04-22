@@ -1,19 +1,20 @@
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">  <!-- グリッド設定、2列 -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6"> <!-- グリッド設定、2列 -->
   <% @movie.reviews.each do |review| %>
-    <% if review.user && review.user.name %>  <!-- ユーザー名が存在する場合のみ表示 -->
-      <div class="card bg-base-100 shadow-lg p-4 rounded-lg w-full flex justify-between">  <!-- フレックスボックスで左右に分割 -->
-        <div class="flex-shrink-0">  <!-- 左側の固定サイズのコンテナ -->
-          <p class="text-gray-800"><%= review.user.name %></p>  <!-- ユーザー名 -->
+    <% if review.user && review.user.name %> <!-- ユーザー名が存在する場合のみ表示 -->
+      <div class="card bg-base-100 shadow-lg p-4 rounded-lg"> <!-- レビューカード -->
+        <!-- カードのコンテンツ -->
+        <div class="flex space-x-4 items-center"> <!-- flexボックス、アイテムを中央揃え -->
+          <!-- ユーザーアバター -->
           <% if review.user.avatar.present? %>
-            <%= image_tag(review.user.avatar.url, alt: "ユーザーアバター", class: "avatar-sm rounded-full", height: "50px", width: "50px") %>  <!-- アバター画像 -->
+            <%= image_tag(review.user.avatar.url, alt: "ユーザーアバター", class: "avatar-sm rounded-full", height: "100px", width: "100px") %> <!-- アバター画像 -->
           <% else %> 
-            <%= image_tag('/images/fallback/sample.jpg', alt: "デフォルトアバター", class: "avatar-sm rounded-full", height: "50px", width: "50px") %>  <!-- デフォルトアバター -->
+            <%= image_tag('/images/fallback/sample.jpg', alt: "デフォルトアバター", class: "avatar-sm rounded-full", height: "100px", width: "100px") %> <!-- デフォルトアバター -->
           <% end %>
+          <!-- レビュー内容 -->
+          <div class="text-gray-800"><%= simple_format(review.content) %></div> 
         </div>
-
-        <div class="flex-grow ml-4 ">  <!-- 右側の可変サイズのコンテナ -->
-          <p class="text-gray-800"><%= review.content %></p>  <!-- レビュー内容 -->
-        </div>
+        <!-- ユーザー名 -->
+        <div class="text-gray-800">ユーザー名：<%= review.user.name %></div> 
       </div>
     <% end %>
   <% end %>
