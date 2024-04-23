@@ -4,8 +4,16 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  # storage :file
   # storage :fog
+
+  if Rails.env.development?
+    storage :fog
+  elsif Rails.env.test?
+    storage :fog
+  else
+    storage :fog
+  end
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -13,6 +21,9 @@ class AvatarUploader < CarrierWave::Uploader::Base
   def default_url
     "/images/fallback/" + [version_name, "sample.jpg"].compact.join('_')  # sample.jpg をデフォルトとして指定
   end
+
+  include CarrierWave::MiniMagick
+  process resize_to_limit: [500, 500]
   
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
@@ -20,6 +31,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   def extension_whitelist
     %w[jpg jpeg gif png]  # 許可された拡張子
+  end
+
+  def filename
+    original_filename if original_filename
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:

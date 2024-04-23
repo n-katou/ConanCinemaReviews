@@ -73,3 +73,6 @@ gem "devise"
 gem 'themoviedb-api', '~> 1.4', '>= 1.4.1'
 gem 'dotenv-rails'
 gem 'carrierwave'
+
+gem 'aws-sdk-s3', require: false
+gem 'fog-aws', '~> 3.0'
