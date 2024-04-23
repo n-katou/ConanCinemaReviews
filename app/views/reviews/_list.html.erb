@@ -18,9 +18,7 @@
         <!-- ユーザー名 -->
         <div class="text-gray-800"><%= review.user.name %></div> 
         <div class="text-right">
-          <% if review.user == current_user %>
-            <%= link_to "削除", movie_review_path(@movie.id, review), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-error btn-error-right" %>
-          <% end %>
+          <%= render 'reviews/like_button', review: review %>
         </div>
       </div>
     <% end %>
