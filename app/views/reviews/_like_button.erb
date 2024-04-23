@@ -1,0 +1,7 @@
+<div id="like_button_<%= review.id %>">
+  <% if review.likes.exists?(user: current_user) %>
+    <%= link_to 'Unlike', movie_review_like_path(@movie.id, review, review.likes.find_by(user: current_user)), data: { turbo_method: :delete }, class: 'btn btn-danger' %>
+  <% else %>
+    <%= link_to 'Like', movie_review_likes_path(@movie.id, review), data: { turbo_method: :post }, class: 'btn btn-success' %>
+  <% end %>
+</div>

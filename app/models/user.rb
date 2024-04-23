@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :reviews, dependent: :destroy
   mount_uploader :avatar, AvatarUploader
+  has_many :likes, dependent: :destroy
 
   # before_save :set_default_avatar, if: -> { avatar.blank? } 
 
