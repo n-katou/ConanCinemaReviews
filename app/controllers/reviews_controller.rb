@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_movie, only: [:create]
+  before_action :set_review, only: [:destroy] 
 
   def create
     @review = @movie.reviews.build(review_params)
@@ -16,6 +17,15 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def destroy
+    if @review.destroy
+      flash[:notice] = "レビューが削除されました。"
+    else
+      flash[:alert] = "レビューの削除に失敗しました。"
+    end
+    redirect_to movie_path(@movie.api_id)
+  end
+
   private
 
   def review_params
@@ -29,5 +39,14 @@ class ReviewsController < ApplicationController
       flash[:alert] = "映画が見つかりませんでした。"
       redirect_to movies_path 
     end
-  end  
+  end
+
+  def set_review
+    @movie = Movie.find_by(api_id: params[:movie_id])
+    @review = @movie.reviews.find(params[:id])
+    if @review.nil?
+      flash[:alert] = "レビューが見つかりませんでした。"
+      redirect_to movie_path(@movie.api_id)
+    end
+  end
 end
