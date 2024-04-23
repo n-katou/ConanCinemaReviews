@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_movie, only: [:create]
+  before_action :set_movie
   before_action :set_review, only: [:destroy] 
 
   def create
@@ -9,7 +9,7 @@ class ReviewsController < ApplicationController
   
     if @review.save
       flash[:notice] = "レビューが投稿されました。"
-      redirect_to movie_path(@movie.api_id)  # ここでapi_idを使用
+      redirect_to movie_path(@movie.id)  # ここでapi_idを使用
     else
       Rails.logger.error("Failed to save review: #{@review.errors.full_messages.join(', ')}")  # エラーログを追加
       flash[:alert] = "レビューの投稿に失敗しました。"
@@ -23,7 +23,7 @@ class ReviewsController < ApplicationController
     else
       flash[:alert] = "レビューの削除に失敗しました。"
     end
-    redirect_to movie_path(@movie.api_id)
+    redirect_to movie_path(@movie.id)
   end
 
   private
@@ -41,12 +41,11 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def set_review
-    @movie = Movie.find_by(api_id: params[:movie_id])
+  def set_review  
     @review = @movie.reviews.find(params[:id])
     if @review.nil?
       flash[:alert] = "レビューが見つかりませんでした。"
-      redirect_to movie_path(@movie.api_id)
+      redirect_to movie_path(@movie.id)
     end
   end
 end

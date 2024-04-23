@@ -10,12 +10,9 @@ class MoviesController < ApplicationController
 
 
   def show
-    Rails.logger.info("Looking for movie with ID: #{params[:id]}")  # デバッグ用ログ
-    @movie = Movie.find_by(api_id: params[:id])
+    @movie = Movie.find(params[:id])
   
     if @movie.nil?
-      # エラーの詳細をログに記録
-      Rails.logger.error("Movie with ID #{params[:id]} not found.")
       flash[:error] = "映画が見つかりません。"
       redirect_to movies_path
     else
@@ -79,11 +76,11 @@ class MoviesController < ApplicationController
   
     # データベースに保存
     movies_list.each do |movie|
-      next if Movie.exists?(api_id: movie["id"])  # 重複チェック
+      next if Movie.exists?(id: movie["id"])  # 重複チェック
   
       # 映画情報を保存
       Movie.create!(
-        api_id: movie["id"],
+        id: movie["id"],
         title: movie["title"],
         release_date: movie["release_date"],
         overview: movie["overview"],

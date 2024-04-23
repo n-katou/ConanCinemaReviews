@@ -23,7 +23,7 @@
   <% end %>
 
   <div class="flex justify-between items-center mt-4">  <!-- ボタン配置 -->
-    <%= link_to '詳細', movie_path(movie.api_id), class: "btn btn-outline" %>  <!-- 詳細リンク -->
+    <%= link_to '詳細', movie_path(movie.id), class: "btn btn-outline" %>  <!-- 詳細リンク -->
     <% if current_user && current_user.email == ENV['ADMIN_EMAIL'] %>
       <%= link_to '削除', movie_path(movie.id), method: :delete, data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-error' %>
     <% end %>

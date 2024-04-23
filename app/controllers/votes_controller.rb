@@ -32,6 +32,6 @@ class VotesController < ApplicationController
     end
     
     # 映画のページにリダイレクト
-    redirect_to movie_path(@movie.api_id)
+    redirect_to movie_path(@movie.id)
   end
 end
