@@ -11,10 +11,17 @@
             <%= image_tag('/images/fallback/sample.jpg', alt: "デフォルトアバター", class: "avatar-sm rounded-full", height: "70px", width: "70px") %> <!-- デフォルトアバター -->
           <% end %>
           <!-- レビュー内容 -->
-          <div class="text-gray-800"><%= simple_format(review.content) %></div> 
+          <div class="text-gray-800">
+            <%= simple_format(review.content) %>
+          </div> 
         </div>
         <!-- ユーザー名 -->
         <div class="text-gray-800"><%= review.user.name %></div> 
+        <div class="text-right">
+          <% if review.user == current_user %>
+            <%= link_to "削除", movie_review_path(@movie.id, review), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-error btn-error-right" %>
+          <% end %>
+        </div>
       </div>
     <% end %>
   <% end %>

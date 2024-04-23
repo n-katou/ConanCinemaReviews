@@ -17,7 +17,7 @@
           </div>
           <p>公開日: <%= movie.release_date %></p>  <!-- 映画の詳細情報 -->
           <p>投票数: <%= movie.votes.count %></p>  <!-- 投票数を表示 -->
-          <%= link_to '詳細', movie_path(movie.api_id), class: "btn btn-outline" %>  <!-- 詳細へのリンク -->
+          <%= link_to '詳細', movie_path(movie.id), class: "btn btn-outline" %>  <!-- 詳細へのリンク -->
         </div>
       <% end %>
     </div>

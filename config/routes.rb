@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     member do
       post 'vote', to: 'votes#vote'
     end
-    resources :reviews, only: [:create]
+    resources :reviews, only: [:create, :destroy]
   end
   post 'movies/fetch_movies', to: 'movies#fetch_movies', as: 'fetch_movies'
 
