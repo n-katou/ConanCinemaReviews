@@ -17,17 +17,8 @@
         </div>
         <!-- ユーザー名 -->
         <div class="text-gray-800"><%= review.user.name %></div> 
-        <div id="like_button_<%= review.id %>">
-          <% if review.likes.exists?(user: current_user) %>
-            <%= link_to 'Unlike', movie_review_like_path(@movie.id, review, review.likes.find_by(user: current_user)), data: { turbo_method: :delete }, class: 'btn btn-danger' %>
-          <% else %>
-            <%= link_to 'Like', movie_review_likes_path(@movie.id, review), data: { turbo_method: :post }, class: 'btn btn-success' %>
-          <% end %>
-        </div>
         <div class="text-right">
-          <% if review.user == current_user %>
-            <%= link_to "削除", movie_review_path(@movie.id, review), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-error btn-error-right" %>
-          <% end %>
+          <%= render 'reviews/like_button', review: review %>
         </div>
       </div>
     <% end %>

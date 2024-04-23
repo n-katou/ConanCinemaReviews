@@ -1,7 +1,27 @@
 <div id="like_button_<%= review.id %>">
-  <% if review.likes.exists?(user: current_user) %>
-    <%= link_to 'Unlike', movie_review_like_path(@movie.id, review, review.likes.find_by(user: current_user)), data: { turbo_method: :delete }, class: 'btn btn-danger' %>
-  <% else %>
-    <%= link_to 'Like', movie_review_likes_path(@movie.id, review), data: { turbo_method: :post }, class: 'btn btn-success' %>
+  <% if user_signed_in? %>  <!-- ログインユーザーの場合 -->
+    <% if review.likes.exists?(user: current_user) %>
+      <%= link_to movie_review_like_path(@movie.id, review, review.likes.find_by(user: current_user)), data: { turbo_method: :delete }, class: 'btn btn-danger' do %>
+        <i class="fas fa-heart-broken"></i> 
+        <span><%= review.likes.count %></span> <!-- いいね数を表示 -->
+      <% end %>
+      <% if review.user == current_user %>
+        <%= link_to movie_review_path(@movie.id, review), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-error btn-error-right" do %>
+          <i class="fas fa-trash-alt"></i> 
+        <% end %>
+      <% end %>
+    <% else %>
+      <%= link_to movie_review_likes_path(@movie.id, review), data: { turbo_method: :post }, class: 'btn btn-success' do %>
+        <i class="fas fa-heart"></i> 
+        <span><%= review.likes.count %></span> <!-- いいね数を表示 -->
+      <% end %>
+      <% if review.user == current_user %>
+        <%= link_to movie_review_path(@movie.id, review), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-error btn-error-right" do %>
+          <i class="fas fa-trash-alt"></i> 
+        <% end %>
+      <% end %>
+    <% end %>
+  <% else %>  <!-- 非ログインユーザーの場合 -->
+    <p>いいね数：<span><%= review.likes.count %></span></p>
   <% end %>
 </div>
