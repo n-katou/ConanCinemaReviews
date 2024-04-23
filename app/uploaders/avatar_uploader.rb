@@ -22,8 +22,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
     "/images/fallback/" + [version_name, "sample.jpg"].compact.join('_')  # sample.jpg をデフォルトとして指定
   end
 
-  include CarrierWave::MiniMagick
-  process resize_to_limit: [500, 500]
+  # include CarrierWave::MiniMagick
+  # process resize_to_limit: [500, 500]
   
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
