@@ -6,15 +6,15 @@
         <div class="flex space-x-4 items-center"> <!-- flexボックス、アイテムを中央揃え -->
           <!-- ユーザーアバター -->
           <% if review.user.avatar.present? %>
-            <%= image_tag(review.user.avatar.url, alt: "ユーザーアバター", class: "avatar-sm rounded-full", height: "100px", width: "100px") %> <!-- アバター画像 -->
+            <%= image_tag(review.user.avatar.url, alt: "ユーザーアバター", class: "avatar-sm rounded-full", height: "70px", width: "70px") %> <!-- アバター画像 -->
           <% else %> 
-            <%= image_tag('/images/fallback/sample.jpg', alt: "デフォルトアバター", class: "avatar-sm rounded-full", height: "100px", width: "100px") %> <!-- デフォルトアバター -->
+            <%= image_tag('/images/fallback/sample.jpg', alt: "デフォルトアバター", class: "avatar-sm rounded-full", height: "70px", width: "70px") %> <!-- デフォルトアバター -->
           <% end %>
           <!-- レビュー内容 -->
           <div class="text-gray-800"><%= simple_format(review.content) %></div> 
         </div>
         <!-- ユーザー名 -->
-        <div class="text-gray-800">ユーザー名：<%= review.user.name %></div> 
+        <div class="text-gray-800"><%= review.user.name %></div> 
       </div>
     <% end %>
   <% end %>
