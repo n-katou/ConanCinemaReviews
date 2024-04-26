@@ -77,6 +77,4 @@ gem 'carrierwave'
 gem 'aws-sdk-s3', require: false
 gem 'fog-aws', '~> 3.0'
 
-gem 'omniauth'
 gem 'omniauth-line'
-gem 'omniauth-rails_csrf_protection'
