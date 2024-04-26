@@ -1,2 +1,44 @@
-<h1>Welcome to My App!</h1>
-<p>This is the home page of our simple Rails application.</p>
+<div class="container mx-auto px-4 py-6">  <!-- コンテナとパディング -->
+  <div class="swiper-container">  <!-- Swiperのコンテナ -->
+    <div class="swiper-wrapper">  <!-- Swiperのスライドラッパー -->
+      <% @movies.each do |movie| %>
+        <div class="swiper-slide">  <!-- Swiperのスライド要素 -->
+          <%= render 'movies/movie', movie: movie %>  <!-- 映画カードのレンダリング -->
+        </div>
+      <% end %>
+    </div>
+
+    <!-- ナビゲーションボタン -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<script>
+  document.addEventListener('turbo:load', () => {
+    const swiper = new Swiper('.swiper-container', {
+      slidesPerView: 1,
+      spaceBetween: 10,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  });
+</script>
+
+<style>
+  .swiper-button-next, .swiper-button-prev {
+    color: blue;  /* 矢印ボタンの色を赤に変更 */
+    background: white;  /* 背景色を白に変更 */
+    border-radius: 50%;  /* 丸い形状にする */
+    padding: 5px;  /* ボタンの余白 */
+  }
+
+  .swiper-button-next:hover, .swiper-button-prev:hover {
+    color: white;  /* ホバー時の矢印の色を白に */
+    background: blue;  /* ホバー時の背景色を赤に */
+  }
+</style>
