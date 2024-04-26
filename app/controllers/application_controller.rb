@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  helper_method :current_user
 
   protected
 
@@ -14,5 +15,13 @@ class ApplicationController < ActionController::Base
       flash[:alert] = "アクセスが許可されていません。"
       redirect_to root_path
     end
+  end
+
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id])
+  end
+
+  def current_user_info
+    current_user ? current_user.email : 'Not logged in'
   end
 end

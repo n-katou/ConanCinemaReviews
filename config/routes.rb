@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   get 'ranking/index'
   get 'pages/home'
-  devise_for :users
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'omniauth_callbacks'
+  }
 
   root 'pages#home'
   resources :movies, only: [:index, :show, :destroy] do
@@ -17,4 +19,5 @@ Rails.application.routes.draw do
   get 'admin', to: 'admin#index'  # 管理者用トップページ
   post 'admin/reset_vote_count', to: 'admin#reset_vote_count'  # 投票数リセット
   get 'ranking', to: 'ranking#index'
+
 end
