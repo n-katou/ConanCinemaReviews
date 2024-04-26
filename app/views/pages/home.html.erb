@@ -1,17 +1,14 @@
-<div class="container mx-auto px-4 py-6">  <!-- コンテナとパディング -->
-  <div class="swiper-container">  <!-- Swiperのコンテナ -->
-    <div class="swiper-wrapper">  <!-- Swiperのスライドラッパー -->
-      <% @movies.each do |movie| %>
-        <div class="swiper-slide">  <!-- Swiperのスライド要素 -->
-          <%= render 'pages/page', movie: movie %>  <!-- 映画カードのレンダリング -->
-        </div>
-      <% end %>
-    </div>
-
-    <!-- ナビゲーションボタン -->
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
+<div class="swiper-container">  <!-- Swiperのコンテナ -->
+  <div class="swiper-wrapper">  <!-- Swiperのスライドラッパー -->
+    <% @movies.each do |movie| %>
+      <div class="swiper-slide" style="width: 150px;">  <!-- スライドの幅を指定 -->
+        <%= render 'pages/page', movie: movie %>  <!-- 映画カードのレンダリング -->
+        <!-- ナビゲーションボタン -->
+      </div>
+    <% end %>
   </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
 </div>
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -19,7 +16,7 @@
 <script>
   document.addEventListener('turbo:load', () => {
     const swiper = new Swiper('.swiper-container', {
-      slidesPerView: 1,
+      slidesPerView: 3,  // 一度に表示されるスライド数を増やしてコンパクトに
       spaceBetween: 10,
       navigation: {
         nextEl: '.swiper-button-next',
@@ -30,15 +27,14 @@
 </script>
 
 <style>
-  .swiper-button-next, .swiper-button-prev {
-    color: blue;  /* 矢印ボタンの色を赤に変更 */
-    background: white;  /* 背景色を白に変更 */
-    border-radius: 50%;  /* 丸い形状にする */
-    padding: 5px;  /* ボタンの余白 */
+  .swiper-slide {
+    width: 150px;  // スライドの幅を小さく
   }
 
-  .swiper-button-next:hover, .swiper-button-prev:hover {
-    color: white;  /* ホバー時の矢印の色を白に */
-    background: blue;  /* ホバー時の背景色を赤に */
+  .swiper-button-next, .swiper-button-prev {
+    color: blue;
+    background: white;
+    border-radius: 50%;
+    padding: 5px;
   }
 </style>
