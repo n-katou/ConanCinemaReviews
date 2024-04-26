@@ -1,0 +1,13 @@
+<div id="movie_<%= movie.id %>" class="card bg-base-100 shadow-lg p-4 rounded-md">  <!-- カードのパディングを減らす -->
+  <h3 class="text-lg font-semibold mb-2"><%= movie.title %></h3>  <!-- フォントサイズを小さく -->
+
+  <% if movie.release_date.present? %>
+    <p class="text-gray-600 text-sm">公開日: <%= movie.release_date %></p>  <!-- フォントサイズを小さく -->
+  <% end %>
+
+  <% if movie.poster_path.present? %>
+    <%= image_tag("https://image.tmdb.org/t/p/w200#{movie.poster_path}", alt: "#{movie.title} ポスター", class: "rounded-md mb-2") %>  <!-- 画像のパディングを減らす -->
+  <% end %>
+
+  <p class="text-gray-600 text-sm">この映画への投票数: <%= Vote.where(movie_id: movie.id).count %></p>  <!-- フォントサイズを小さく -->
+</div>
