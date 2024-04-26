@@ -1,31 +1,13 @@
-<div id="movie_<%= movie.id %>" class="card bg-base-100 shadow-xl p-6 rounded-lg">  <!-- カードコンポーネント -->
-  <h3 class="text-xl font-semibold mb-2"><%= movie.title %></h3>
+<div id="movie_<%= movie.id %>" class="card bg-base-100 shadow-lg p-4 rounded-md">  <!-- カードのパディングを減らす -->
+  <h3 class="text-lg font-semibold mb-2"><%= movie.title %></h3>  <!-- フォントサイズを小さく -->
 
-  <%# 公開日を表示 %>
   <% if movie.release_date.present? %>
-    <p class="text-gray-600">公開日: <%= movie.release_date %></p>
+    <p class="text-gray-600 text-sm">公開日: <%= movie.release_date %></p>  <!-- フォントサイズを小さく -->
   <% end %>
 
-  <%# 映画のポスターを表示 %>
   <% if movie.poster_path.present? %>
-    <%= image_tag("https://image.tmdb.org/t/p/w200#{movie.poster_path}", alt: "#{movie.title} ポスター", class: "rounded-lg mb-4") %>  <!-- 画像を丸くする -->
+    <%= image_tag("https://image.tmdb.org/t/p/w200#{movie.poster_path}", alt: "#{movie.title} ポスター", class: "rounded-md mb-2") %>  <!-- 画像のパディングを減らす -->
   <% end %>
 
-  <%# 投票数を表示 %>
-  <p class="text-gray-600">この映画への投票数: <%= Vote.where(movie_id: movie.id).count %></p>
-
-  <%# ユーザーが投票済みか確認し、メッセージを表示 %>
-  <% if current_user %>  <!-- ユーザーがログインしているか確認 -->
-    <% user_vote = Vote.where(user_id: current_user.id, movie_id: movie.id).exists? %>  <!-- 投票済みかどうかを確認 -->
-    <% if user_vote %>  <!-- 投票済みの場合 -->
-      <div class="badge badge-success">あなたはこの映画に投票しました</div>
-    <% end %>
-  <% end %>
-
-  <div class="flex justify-between items-center mt-4">  <!-- ボタン配置 -->
-    <%= link_to '詳細', movie_path(movie.id), class: "btn btn-outline" %>  <!-- 詳細リンク -->
-    <% if current_user && current_user.email == ENV['ADMIN_EMAIL'] %>
-      <%= link_to '削除', movie_path(movie.id), method: :delete, data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-error' %>
-    <% end %>
-  </div>
+  <p class="text-gray-600 text-sm">この映画への投票数: <%= Vote.where(movie_id: movie.id).count %></p>  <!-- フォントサイズを小さく -->
 </div>
