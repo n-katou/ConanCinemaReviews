@@ -1,12 +1,12 @@
-<div class="container mx-auto px-4 py-6">  <!-- コンテナとパディング -->
+<div class="container px-4 py-6">  <!-- コンテナとパディング -->
   <div class="flex justify-between items-center mb-6">  <!-- ヘッダー -->
     <h1 class="text-3xl font-bold">映画一覧</h1>  <!-- ページのタイトル -->
   </div>
 
-  <div class="swiper-container mx-auto">  <!-- Swiperの中央配置 -->
+  <div class="swiper-container">  <!-- Swiperの中央配置 -->
     <div class="swiper-wrapper">  <!-- Swiperのスライドラッパー -->
       <% @movies.each do |movie| %>
-        <div class="swiper-slide" style="width: 200px;">  <!-- スライドの幅を設定 -->
+        <div class="swiper-slide">  <!-- スライドの幅を設定 -->
           <%= render 'pages/page', movie: movie %>  <!-- 映画カードのレンダリング -->
         </div>
       <% end %>
