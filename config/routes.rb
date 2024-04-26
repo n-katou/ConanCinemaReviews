@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'pages/home'
   devise_for :users
 
-  root 'movies#index'
+  root 'pages#home'
   resources :movies, only: [:index, :show, :destroy] do
     resources :reviews, only: [:create, :destroy] do
       resources :likes, only: [:create, :destroy]
