@@ -3,7 +3,7 @@
     <div class="swiper-wrapper">  <!-- Swiperのスライドラッパー -->
       <% @movies.each do |movie| %>
         <div class="swiper-slide">  <!-- Swiperのスライド要素 -->
-          <%= render 'movies/movie', movie: movie %>  <!-- 映画カードのレンダリング -->
+          <%= render 'pages/page', movie: movie %>  <!-- 映画カードのレンダリング -->
         </div>
       <% end %>
     </div>
