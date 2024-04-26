@@ -6,7 +6,7 @@
   <div class="swiper-container">  <!-- Swiperの中央配置 -->
     <div class="swiper-wrapper">  <!-- Swiperのスライドラッパー -->
       <% @movies.each do |movie| %>
-        <div class="swiper-slide">  <!-- スライドの幅を設定 -->
+        <div class="swiper-slide" style="width: 200px;">  <!-- スライドの幅を設定 -->
           <%= render 'pages/page', movie: movie %>  <!-- 映画カードのレンダリング -->
         </div>
       <% end %>
