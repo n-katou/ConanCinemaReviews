@@ -1,13 +1,16 @@
-<div id="movie_<%= movie.id %>">  <!-- カードのパディングを減らす -->
-  <h3 class="text-lg font-semibold mb-2"><%= movie.title %></h3>  <!-- フォントサイズを小さく -->
+<div id="movie_<%= movie.id %>" class="card bg-base-100 shadow-xl p-6 rounded-lg">  <!-- カードコンポーネント -->
+  <h3 class="text-xl font-semibold mb-2"><%= movie.title %></h3>
 
+  <%# 公開日を表示 %>
   <% if movie.release_date.present? %>
-    <p class="text-gray-600 text-sm">公開日: <%= movie.release_date %></p>  <!-- フォントサイズを小さく -->
+    <p class="text-gray-600">公開日: <%= movie.release_date %></p>
   <% end %>
 
+  <%# 映画のポスターを表示 %>
   <% if movie.poster_path.present? %>
-    <%= image_tag("https://image.tmdb.org/t/p/w200#{movie.poster_path}", alt: "#{movie.title} ポスター", class: "rounded-md mb-2") %>  <!-- 画像のパディングを減らす -->
+    <%= image_tag("https://image.tmdb.org/t/p/w200#{movie.poster_path}", alt: "#{movie.title} ポスター", class: "rounded-lg mb-4") %>  <!-- 画像を丸くする -->
   <% end %>
 
-  <p class="text-gray-600 text-sm">この映画への投票数: <%= Vote.where(movie_id: movie.id).count %></p>  <!-- フォントサイズを小さく -->
+  <%# 投票数を表示 %>
+  <p class="text-gray-600">この映画への投票数: <%= Vote.where(movie_id: movie.id).count %></p>
 </div>
