@@ -8,7 +8,7 @@
 
   <%# 映画のポスターを表示 %>
   <% if movie.poster_path.present? %>
-    <%= image_tag("https://image.tmdb.org/t/p/w200#{movie.poster_path}", alt: "#{movie.title} ポスター", class: "rounded-lg mb-4") %>  <!-- 画像を丸くする -->
+    <%= image_tag("https://image.tmdb.org/t/p/w200#{movie.poster_path}", alt: "#{movie.title} ポスター", width: "400px", height: "600px", class: "rounded-lg mb-4") %>  <!-- 画像を丸くする -->
   <% end %>
 
   <%# 投票数を表示 %>
