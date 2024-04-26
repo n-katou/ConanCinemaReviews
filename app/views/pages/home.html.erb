@@ -1,36 +1,49 @@
 <div class="container px-4 py-6">  <!-- コンテナとパディング -->
-  <div class="flex justify-between items-center mb-6">  <!-- ヘッダー -->
-    <h1 class="text-3xl font-bold">映画一覧</h1>  <!-- ページのタイトル -->
-  </div>
+  <div class="text-lg mb-4">  <!-- 説明文 -->
+    <h2 class="text-2xl font-semibold mt-4">最高のコナン映画を選ぼう</h2>
+    <p>名探偵コナンファンのための映画レビューサイトへようこそ！<br>
+    このサイトでは、投票数に基づいて映画のランキングを紹介しています。<br>
+    一人3票まで投票できるので、あなたのお気に入りの映画を選んで、ランキングに反映させましょう。</p>
 
-  <div class="swiper-container">  <!-- Swiperの中央配置 -->
-    <div class="swiper-wrapper">  <!-- Swiperのスライドラッパー -->
-      <% @movies.each do |movie| %>
-        <div class="swiper-slide" style="width: 200px;">  <!-- スライドの幅を設定 -->
-          <%= render 'pages/page', movie: movie %>  <!-- 映画カードのレンダリング -->
-        </div>
-      <% end %>
+    <h2 class="text-2xl font-semibold mt-4">レビューを投稿しよう</h2>
+    <p>映画に関するレビューも投稿できます。印象的だったシーンや、お気に入りのキャラクターについて、他のファンと意見を共有してください。レビューを読むことで、新たな視点から映画を楽しむことができます。</p>
+    <p>最新映画もランキング対象なので、ネタバレは禁止でお願いいたします！</p>
+  </div>
+  <br><br>
+  <h1 class="text-3xl font-bold">映画一覧</h1>
+  <div class="mt-12">  <!-- Swiperセクションとの間隔を大きく -->
+    <div class="swiper-container">  <!-- Swiperの中央配置 -->
+      <div class="swiper-wrapper">  <!-- Swiperのスライドラッパー -->
+        <% @movies.each do |movie| %>
+          <div class="swiper-slide" style="width: 200px;">  <!-- スライドの幅を設定 -->
+            <%= render 'pages/page', movie: movie %>  <!-- 映画カードのレンダリング -->
+          </div>
+        <% end %>
+      </div>
+
+      <!-- ナビゲーションボタン -->
+      <div class="swiper-button-next btn btn-circle"></div>  <!-- DaisyUIのスタイル -->
+      <div class="swiper-button-prev"></div>  <!-- DaisyUIのスタイル -->
     </div>
-
-    <!-- ナビゲーションボタン -->
-    <div class="swiper-button-next btn btn-circle"></div>  <!-- DaisyUIのスタイル -->
-    <div class="swiper-button-prev"></div>  <!-- DaisyUIのスタイル -->
   </div>
 
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-  <script>
-    document.addEventListener('turbo:load', () => {
-      const swiper = new Swiper('.swiper-container', {
-        slidesPerView: 3,  // 1つずつスライド
-        spaceBetween: 10,  // スライド間のスペース
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-      });
-    });
-  </script>
+  <div class="flex justify-center py-6 mt-12">  <!-- Swiperセクションとの間隔を大きく -->
+    <%= link_to '映画一覧へ', movies_path, class: 'btn btn-outline btn-accent' %>  <!-- リンクの中央寄せ -->
+  </div>
 </div>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+  document.addEventListener('turbo:load', () => {
+    const swiper = new Swiper('.swiper-container', {
+      slidesPerView: 3,  // 1つずつスライド
+      spaceBetween: 10,  // スライド間のスペース
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  });
+</script>
 
 <style>
   .swiper-button-next, .swiper-button-prev {
