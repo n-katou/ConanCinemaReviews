@@ -21,5 +21,8 @@ Rails.application.routes.draw do
   get 'admin', to: 'admin#index'  # 管理者用トップページ
   post 'admin/reset_vote_count', to: 'admin#reset_vote_count'  # 投票数リセット
   get 'ranking', to: 'ranking#index'
-
+  
+  post 'oauth/callback', to: 'google_oauths#callback', as: :oauth_callback_post
+  get 'oauth/callback', to: 'google_oauths#callback', as: :oauth_callback_get
+  get 'oauth/:provider', to: 'google_oauths#oauth', as: :auth_at_provider
 end

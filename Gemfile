@@ -78,3 +78,4 @@ gem 'aws-sdk-s3', require: false
 gem 'fog-aws', '~> 3.0'
 
 gem 'omniauth-line'
+gem 'omniauth-google-oauth2'
