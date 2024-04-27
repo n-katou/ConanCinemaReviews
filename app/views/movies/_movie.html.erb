@@ -12,8 +12,8 @@
   <% end %>
 
   <%# 投票数を表示 %>
-  <p class="text-gray-600">この映画への投票数: <%= Vote.where(movie_id: movie.id).count %></p>
-  <p class="text-gray-600">この映画へのレビュー数: <%= Review.where(movie_id: movie.id).count %></p>
+  <p class="text-gray-600">投票数: <%= Vote.where(movie_id: movie.id).count %></p>
+  <p class="text-gray-600">レビュー数: <%= Review.where(movie_id: movie.id).count %></p>
 
   <%# ユーザーが投票済みか確認し、メッセージを表示 %>
   <% if current_user %>  <!-- ユーザーがログインしているか確認 -->
