@@ -48,12 +48,39 @@
     color: blue;  /* 矢印ボタンの色を赤に変更 */
     background: white;  /* 背景色を白に変更 */
     border-radius: 50%;  /* 丸い形状にする */
-    padding: 5px;  /* ボタンの余白 */
+    padding: 5px;
+    top: 50%;
+  }
+  @media (max-width: 768px) {
+    .swiper-button-next, .swiper-button-prev {
+      top: 100%;  /* タブレットサイズではボタン位置を調整 */
+    }
   }
 
   .swiper-button-next:hover, .swiper-button-prev:hover {
     color: white;  /* ホバー時の矢印の色を白に */
     background: blue;  /* ホバー時の背景色を赤に */
   }
+
+  .container {
+    max-width: 1200px;  /* 最大幅を設定 */
+    margin: 0 auto;  /* 中央寄せ */
+    padding: 16px;  /* パディングを設定 */
+  }
+
+  .swiper-slide {
+    width: 200px;  /* デフォルトのスライド幅 */
+  }
+
+  @media (max-width: 768px) {
+    .swiper-slide {
+      width: 150px;  /* タブレットサイズではスライド幅を狭く */
+    }
+  }
+
+  @media (max-width: 480px) {
+    .swiper-slide {
+      width: 100px;  /* スマートフォンサイズではさらに狭く */
+    }
 </style>
 
