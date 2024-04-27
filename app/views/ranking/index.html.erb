@@ -16,7 +16,8 @@
             <%= image_tag("https://image.tmdb.org/t/p/w200#{movie.poster_path}", alt: "#{movie.title} ポスター", class: "rounded-xl mb-4") %>  <!-- ポスター画像 -->
           </div>
           <p>公開日: <%= movie.release_date %></p>  <!-- 映画の詳細情報 -->
-          <p>投票数: <%= movie.votes.count %></p>  <!-- 投票数を表示 -->
+          <p>投票数: <%= movie.votes.count %></p>
+          <p>レビュー数: <%= Review.where(movie_id: movie.id).count %></p>  <!-- 投票数を表示 -->
           <%= link_to '詳細', movie_path(movie.id), class: "btn btn-outline" %>  <!-- 詳細へのリンク -->
         </div>
       <% end %>
