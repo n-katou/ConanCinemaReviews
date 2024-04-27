@@ -8,6 +8,9 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
   has_many :likes, dependent: :destroy
 
+  has_many :authentications, dependent: :destroy
+  accepts_nested_attributes_for :authentications
+
   # before_save :set_default_avatar, if: -> { avatar.blank? } 
 
   # private

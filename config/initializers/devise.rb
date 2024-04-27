@@ -17,6 +17,12 @@ Devise.setup do |config|
   # config.secret_key = '544ab133deb4e03fd8c5246bfbae66f465aa1a4ef0b123255e47fb9097a3ad989af9f70c32042c6e7a020b7cf1b2da7194c833fbe1db6558fb7b636f735c9f98'
   config.omniauth :line, ENV['LINE_CHANNEL_ID'], ENV['LINE_CHANNEL_SECRET']
 
+  config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'], {
+    scope: 'email,profile',
+    prompt: 'consent',
+    redirect_uri: 'https://conancinemareviews.onrender.com/oauth/callback?provider=google'
+  }
+
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
