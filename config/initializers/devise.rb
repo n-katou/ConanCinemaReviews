@@ -15,6 +15,7 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '544ab133deb4e03fd8c5246bfbae66f465aa1a4ef0b123255e47fb9097a3ad989af9f70c32042c6e7a020b7cf1b2da7194c833fbe1db6558fb7b636f735c9f98'
+  config.omniauth :line, ENV['LINE_CHANNEL_ID'], ENV['LINE_CHANNEL_SECRET']
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
