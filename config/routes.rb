@@ -25,4 +25,6 @@ Rails.application.routes.draw do
   post 'oauth/callback', to: 'google_oauths#callback', as: :oauth_callback_post
   get 'oauth/callback', to: 'google_oauths#callback', as: :oauth_callback_get
   get 'oauth/:provider', to: 'google_oauths#oauth', as: :auth_at_provider
+
+  get '/reviews_ranking', to: 'ranking#reviews_ranking'
 end
