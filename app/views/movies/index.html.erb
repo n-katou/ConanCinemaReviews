@@ -1,7 +1,10 @@
 <div class="container mx-auto px-4 py-6">  <!-- コンテナとパディング -->
   <div class="flex justify-between items-center mb-6">  <!-- 中央配置 -->
     <h1 class="text-3xl font-bold">映画一覧</h1>  <!-- 映画一覧の見出し -->
-    <%= link_to 'ランキングへ', ranking_path, class: 'btn btn-outline btn-accent' %>  <!-- ランキングへのリンクを強調 -->
+    <div>
+      <%= link_to '投票数ランキングへ', ranking_path, class: 'btn btn-outline btn-accent' %>  <!-- ランキングへのリンクを強調 -->
+      <%= link_to 'レビュー数ランキングへ', reviews_ranking_path, class: 'btn btn-outline btn-accent' %>  <!-- ランキングへのリンクを強調 -->
+    </div>
   </div>
 
   <% if @movies.any? %>
