@@ -1,4 +1,4 @@
-<div class="container px-4 py-6">  <!-- コンテナとパディング -->
+<div class="container mx-auto px-4 py-6">  <!-- コンテナとパディング、中央寄せ -->
   <div class="text-lg mb-4">  <!-- 説明文 -->
     <h2 class="text-2xl font-semibold mt-4">最高のコナン映画を選ぼう</h2>
     <p>名探偵コナンファンのための映画レビューサイトへようこそ！<br>
@@ -13,7 +13,7 @@
   </div>
   <br><br>
   <h1 class="text-3xl font-bold">映画一覧</h1>
-  <div class="mt-12">  <!-- Swiperセクションとの間隔を大きく -->
+  <div class="mt-12 overflow-hidden relative">  <!-- Swiperセクションとの間隔を大きく、overflow-hidden適用 -->
     <div class="swiper-container">  <!-- Swiperの中央配置 -->
       <div class="swiper-wrapper">  <!-- Swiperのスライドラッパー -->
         <% @movies.each do |movie| %>
