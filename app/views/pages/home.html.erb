@@ -33,12 +33,20 @@
 <script>
   document.addEventListener('turbo:load', () => {
     const swiper = new Swiper('.swiper-container', {
-      slidesPerView: 3,  // 1つずつスライド
-      spaceBetween: 10,  // スライド間のスペース
+      slidesPerView: 1, // デフォルトでは1つのスライド
+      spaceBetween: 10, // スライド間のスペース
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
+      // レスポンシブブレイクポイントの設定
+      breakpoints: {
+        // 768px以上の場合
+        768: {
+          slidesPerView: 3, // 3つのスライドを表示
+          spaceBetween: 10 // スペースは同じで
+        }
+      }
     });
   });
 </script>
@@ -49,11 +57,15 @@
     background: white;  /* 背景色を白に変更 */
     border-radius: 50%;  /* 丸い形状にする */
     padding: 5px;
-    top: 50%;
+    top: 50%;  /* 常にコンテナの中央に配置 */
+    transform: translateY(-50%);  /* ボタンの中心を正確に中央に合わせる */
   }
+
   @media (max-width: 768px) {
     .swiper-button-next, .swiper-button-prev {
-      top: 100%;  /* タブレットサイズではボタン位置を調整 */
+      top: auto;  /* タブレットサイズではtopの設定を解除 */
+      bottom: 10px;  /* コンテナの下部から10pxの位置に配置 */
+      right: 10px;  /* 右側の余白を設定 */
     }
   }
 
@@ -82,5 +94,6 @@
     .swiper-slide {
       width: 100px;  /* スマートフォンサイズではさらに狭く */
     }
+  }
 </style>
 
